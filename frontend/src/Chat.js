@@ -7,7 +7,7 @@ import InsertEmoticon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
 import './Chat.css';
 
-const Chat = () => {
+const Chat = ({ messages }) => {
 	return (
 		<div className='chat'>
 			<div className='chat__header'>
@@ -32,34 +32,20 @@ const Chat = () => {
 			</div>
 
 			<div className='chat__body'>
-				<p className='chat__message'>
-					<span className='chat__name'>Randy</span>
-					This is a message
-					<span className='chat__timestamp'>
-						{new Date().toUTCString()}
-					</span>
-				</p>
-				<p className='chat__message chat__receiver'>
-					<span className='chat__name'>Chris</span>
-					This is a message
-					<span className='chat__timestamp'>
-						{new Date().toUTCString()}
-					</span>
-				</p>
-				<p className='chat__message'>
-					<span className='chat__name'>Randy</span>
-					This is a message
-					<span className='chat__timestamp'>
-						{new Date().toUTCString()}
-					</span>
-				</p>
-				<p className='chat__message chat__receiver'>
-					<span className='chat__name'>Chris</span>
-					This is a message
-					<span className='chat__timestamp'>
-						{new Date().toUTCString()}
-					</span>
-				</p>
+				{messages.map((message) => (
+					<p
+						className={`chat__message ${
+							message.received && 'chat__receiver'
+						}`}
+						key={message.id}
+					>
+						<span className='chat__name'>{message.name}</span>
+						{message.message}
+						<span className='chat__timestamp'>
+							{message.timestamp}
+						</span>
+					</p>
+				))}
 			</div>
 
 			<div className='chat__footer'>
